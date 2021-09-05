@@ -152,7 +152,7 @@ class DataSet extends ChangeNotifier {
   TechnicalIndicator oscInfo;
   PivotPoints pivotInfo;
 
-  Future<void> setData(String time) async {
+  Future<String> setData(String time) async {
     const url =
         'https://api.bottomstreet.com/forex/technical?forex_name=USDINR';
     final response = await http.get(url);
@@ -171,5 +171,6 @@ class DataSet extends ChangeNotifier {
 
     notifyListeners();
     print("Successful");
+    return Future.value("Successful");
   }
 }
