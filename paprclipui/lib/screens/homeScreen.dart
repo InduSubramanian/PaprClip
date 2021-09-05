@@ -1,20 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../screens/movingAverageScreen.dart';
+import '../screens/oscillatorScreen.dart';
+import '../screens/pivotScreen.dart';
+import '../providers/data.dart';
 
 import '../widgets/header.dart';
-import '../widgets/salesIndicator.dart';
-import '../widgets/dropdown.dart';
-import '../widgets/table1.dart';
-import '../widgets/primarybutton.dart';
-import '../widgets/table2.dart';
-import '../widgets/pivottable.dart';
+
 import '../widgets/indicationbar.dart';
 import '../widgets/summaryopt.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool _isInit = true;
+  // @override
+  // void initState() {
+  //   if (_isInit) {
+  //     Provider.of<DataSet>(context).setData("1min");
+  //     _isInit = false;
+  //   }
+
+  //   super.initState();
+  // }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      Provider.of<DataSet>(context).setData("1min");
+      _isInit = false;
+      print(_isInit);
+    }
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    // return FutureBuilder<String>(
+    //   future: Provider.of<DataSet>(context).setData("1min"),
+    //   builder: (context, AsyncSnapshot<String> snapshot) {
+    //     print(snapshot.connectionState);
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return Scaffold(
+    //         body: SafeArea(
+    //           child: Center(
+    //             child: Text("Please wait it's loading"),
+    //           ),
+    //         ),
+    //       );
+    //     } else {
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -59,26 +99,10 @@ class HomeScreen extends StatelessWidget {
                     SummaryOpt(),
                   ],
                 ),
-                Container(
-                  height: 100,
+                SizedBox(
+                  height: 30,
                 ),
-                Text(
-                  "Moving Averages",
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                PrimaryButton(
-                  c: Color(0xFF007AFF),
-                  val: "BUY",
-                ),
-                SalesIndicator(
-                  buy: "7",
-                  neutral: "-",
-                  sell: "5",
-                ),
-                DropDown(
-                  val: "Exponential",
-                ),
-                Table1(),
+                MovingAverageScreen(),
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
@@ -86,17 +110,7 @@ class HomeScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ),
-                PrimaryButton(
-                  c: Color(0xFFFF2E50),
-                  val: "STRONG SELL",
-                ),
-                SalesIndicator(
-                  buy: "1",
-                  neutral: "1",
-                  sell: "9",
-                ),
-                SizedBox(height: 15),
-                Table2(),
+                OscillatorScreen(),
                 Padding(
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
@@ -104,13 +118,15 @@ class HomeScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ),
-                DropDown(val: "Classic"),
-                PivotTable(),
+                PivotScreen(),
               ],
             ),
           ),
         ),
       ),
     );
+    //     }
+    //   },
+    // );
   }
 }

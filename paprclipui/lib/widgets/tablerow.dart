@@ -4,7 +4,13 @@ class Tablerow extends StatelessWidget {
   final String d1, d2, d3;
   final Color c3;
   final Color c1;
-  const Tablerow({Key key, this.d1, this.d2, this.d3, this.c3, this.c1})
+  const Tablerow(
+      {Key key,
+      @required this.d1,
+      @required this.d2,
+      @required this.d3,
+      @required this.c3,
+      @required this.c1})
       : super(key: key);
 
   @override
@@ -34,7 +40,7 @@ class Tablerow extends StatelessWidget {
             // alignment: Alignment.centerRight,
             width: ((size.width * 0.9) / 3.15),
             child: Text(
-              d3,
+              d3.toUpperCase(),
               textAlign: TextAlign.end,
               style: Theme.of(context).textTheme.subtitle2.copyWith(color: c3),
             ),

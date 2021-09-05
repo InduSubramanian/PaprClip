@@ -16,15 +16,15 @@ class TableHeading extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            h1,
+            "${h1[0].toUpperCase()}${h1.substring(1)}",
             style: Theme.of(context).textTheme.headline6,
           ),
           Text(
-            h2,
+            "${h2[0].toUpperCase()}${h2.substring(1)}",
             style: Theme.of(context).textTheme.headline6,
           ),
           Text(
-            h3,
+            " ${h3[0].toUpperCase()}${h3.substring(1)}",
             style: Theme.of(context).textTheme.headline6,
           )
         ],
